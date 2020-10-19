@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+    nginx:
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - ./hosts:/etc/nginx/conf.d
+            - ./www:/var/www
+            - ./logs:/var/log/nginx
+    php:
+        build: ./images/php
+        container_name: php-fpm
+        volumes:
+            - ./www:/var/www   
+    db:
+        image: mysql:5.7
+        container_name: db
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: opencart
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: 1234567
+            MYSQL_ROOT_PASSWORD: root
+        volumes:
+            - ./db:/var/lib/mysql 
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080        
