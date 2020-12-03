@@ -5,7 +5,9 @@ RUN apt-get update && apt-get install -y \
         wget \
         git \
         zip \
-    && docker-php-ext-install -j$(nproc) iconv mbstring mysqli
+    && docker-php-ext-install -j$(nproc) iconv mbstring mysqli \
+    && pecl install xdebug-2.8.0 \
+    && docker-php-ext-enable xdebug
 
 RUN apt-get update && apt-get install -y libpng-dev 
 RUN apt-get install -y \
@@ -30,6 +32,7 @@ RUN apt-get install -y libzip-dev && docker-php-ext-configure zip --with-libzip=
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ADD php.ini /usr/local/etc/php/conf.d/40-custom.ini
+ADD mods/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 WORKDIR /var/www
 
