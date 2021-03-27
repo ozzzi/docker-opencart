@@ -12,7 +12,9 @@ services:
         build: ./images/php
         container_name: php-fpm
         volumes:
-            - ./www:/var/www   
+            - ./www:/var/www  
+        environment:
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}      
     db:
         image: mysql:5.7
         container_name: db

@@ -4,7 +4,7 @@
 - Nginx
 - MySQL 5.7
 - Adminer
-- xDegug 2.8
+- xDebug 3 
 
 ## MySQL settings
 host: **db** (container name)
@@ -20,11 +20,12 @@ pass: **1234567**
 ## xDebug
 **Need to set:**
 
-xdebug.remote_host (*images/php/mods/xdebug.ini*) = container IP (Linux)
+xdebug.client_host (*images/php/mods/xdebug.ini*) = container IP (Linux)
 
-xdebug.remote_host = host.docker.internal (Win|Mac)
+xdebug.client_host = host.docker.internal (Win|Mac)
 
 #### PhpStom
 idekey = PHPSTORM
+Server name = Docker
  
 
